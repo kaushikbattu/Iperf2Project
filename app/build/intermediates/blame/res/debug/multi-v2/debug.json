@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\build\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "19,21,-1,-1,-1",
+                        "startColumns": "4,4,-1,-1,-1",
+                        "startOffsets": "750,834,-1,-1,-1",
+                        "endColumns": "50,58,-1,-1,-1",
+                        "endOffsets": "796,888,-1,-1,-1"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,106,165,215,248",
+                        "endColumns": "50,58,49,32,57",
+                        "endOffsets": "101,160,210,243,301"
+                    }
+                }
+            ]
+        }
+    ]
+}

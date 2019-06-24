@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\build\\intermediates\\res\\merged\\debug\\anim_fade.xml.flat",
+        "source": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\src\\main\\res\\anim\\fade.xml"
+    },
+    {
+        "merged": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_diskette.png.flat",
+        "source": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\src\\main\\res\\drawable-hdpi\\diskette.png"
+    },
+    {
+        "merged": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\build\\intermediates\\res\\merged\\debug\\layout_iperf_activity.xml.flat",
+        "source": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\src\\main\\res\\layout\\iperf_activity.xml"
+    },
+    {
+        "merged": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_icon128.png.flat",
+        "source": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\src\\main\\res\\drawable-hdpi\\icon128.png"
+    },
+    {
+        "merged": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_icon512.png.flat",
+        "source": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\src\\main\\res\\drawable-hdpi\\icon512.png"
+    }
+]

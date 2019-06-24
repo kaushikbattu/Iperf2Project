@@ -1,0 +1,83 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:22:1-39:12
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:22:1-39:12
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:22:1-39:12
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:22:1-39:12
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:22:1-39:12
+	package
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:23:5-28
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:22:1-39:12
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:22:11-69
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:24:1-91
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:24:18-72
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:25:1-79
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:25:18-60
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:26:1-88
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:26:18-69
+uses-permission#android.permission.CHANGE_NETWORK_STATE
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:27:1-91
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:27:18-72
+uses-permission#android.permission.CHANGE_WIFI_STATE
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:28:1-88
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:28:18-69
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:29:5-97
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:29:22-78
+application
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:30:5-38:19
+	android:label
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:30:18-52
+	android:icon
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:30:53-85
+activity#iperf.project.IperfProject
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:31:9-37:20
+	android:configChanges
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:31:61-96
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:31:19-60
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:32:13-36:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:33:17-68
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:33:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:35:17-76
+	android:name
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml:35:27-74
+uses-sdk
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+	android:maxSdkVersion
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Battu\AndroidStudioProjects\Iperf2Project\app\src\main\AndroidManifest.xml

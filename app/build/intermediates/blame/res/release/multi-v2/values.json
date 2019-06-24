@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "19,21,22,20,18",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "750,834,906,801,692",
+                        "endColumns": "50,71,59,32,57",
+                        "endOffsets": "796,901,961,829,745"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,106,178,228,261",
+                        "endColumns": "50,71,49,32,57",
+                        "endOffsets": "101,173,223,256,314"
+                    }
+                }
+            ]
+        }
+    ]
+}
