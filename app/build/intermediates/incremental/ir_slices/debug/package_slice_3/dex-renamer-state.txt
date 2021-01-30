@@ -1,4 +1,0 @@
-#Sat Jun 22 10:05:01 IST 2019
-base.0=C\:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\3
-path.0=classes.dex
-renamed.0=classes.dex

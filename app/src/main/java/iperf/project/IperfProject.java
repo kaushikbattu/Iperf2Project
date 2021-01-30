@@ -11,19 +11,35 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.Inet4Address;
+import java.net.Inet6Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import iperf.project.R;
+
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
@@ -33,11 +49,14 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
+import static android.content.ContentValues.TAG;
+import static android.provider.Settings.System.*;
+
 //Main class of the activity
 public class IperfProject extends Activity {
 	
 	String txtFileName = "iperf.txt";
-	
+
 	public IperfProject() {
 	}
 
@@ -51,7 +70,8 @@ public class IperfProject extends Activity {
 		//Shows the logo screen, and waits for a tap to continue to the main screen
 		setContentView(R.layout.iperf_activity);
 		//Get Wifi connection information and displays it in the main screen
-		getCurrentIP();
+		// getCurrentIP();
+		getLocalIpAddress("IPv4");
 	}
 
 	//Used to retrieve WiFi connection information and check if a connection exists. If not, display an error on the main screen, otherwise displays the local IP.
@@ -72,27 +92,69 @@ public class IperfProject extends Activity {
 			ip.append("Error: a wifi connection cannot be detected.");
 		}
 	}
-
+    // New method for getting IP_Address of connected device.
+	public void getLocalIpAddress(String inettype) {
+		final TextView ip = (TextView) findViewById(R.id.ip);
+		ip.setText(null);
+		try {
+			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); ((Enumeration) en).hasMoreElements();) {
+				NetworkInterface intf = en.nextElement();
+				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+					InetAddress inetAddress = enumIpAddr.nextElement();
+					if (inettype == "IPv6") {
+						if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet6Address) {
+							Pattern pattern = Pattern.compile("wlan", Pattern.CASE_INSENSITIVE);
+							Matcher matcher = pattern.matcher(intf.getDisplayName());
+							boolean matchFound = matcher.find();
+							if (matchFound) {
+								ip.append("Your IP address is: " + inetAddress.getHostAddress());
+								return;
+							} else {
+								ip.append("Error: a wifi connection cannot be detected.");
+								return;
+							}
+						}
+					} else if (inettype == "IPv4") {
+						if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+							Pattern pattern = Pattern.compile("wlan", Pattern.CASE_INSENSITIVE);
+							Matcher matcher = pattern.matcher(intf.getDisplayName());
+							boolean matchFound = matcher.find();
+							if (matchFound) {
+								ip.append("Your IP address is: " + inetAddress.getHostAddress());
+								return;
+							} else {
+								ip.append("Error: a wifi connection cannot be detected.");
+								return;
+							}
+						}
+					}
+				}
+			}
+		} catch (SocketException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	//This function is used to copy the iperf executable to a directory which execute permissions for this application, and then gives it execute permissions.
 	//It runs on every initiation of an iperf test, but copies the file only if it's needed.
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public void initIperf() {
 		final TextView tv = (TextView) findViewById(R.id.OutputText);
 		InputStream in;
 		try {
 			//The asset "iperf" (from assets folder) inside the activity is opened for reading.
-			in = getResources().getAssets().open("iperf");
+			in = getResources().getAssets().open("iperf2014a");
 		} catch (IOException e2) {
 			tv.append("\nError occurred while accessing system resources, please reboot and try again.");
 			return;			
 		}
 		try {
 			//Checks if the file already exists, if not copies it.
-			new FileInputStream("/data/data/iperf.project/iperf");
+			new FileInputStream("/data/data/iperf.project/iperf2014a");
 		} catch (FileNotFoundException e1) {
 			try {
 				//The file named "iperf" is created in a system designated folder for this application.
-				OutputStream out = new FileOutputStream("/data/data/iperf.project/iperf", false);
+				OutputStream out = new FileOutputStream("/data/data/iperf.project/iperf2014a", false);
 				// Transfer bytes from "in" to "out"
 				byte[] buf = new byte[1024];
 				int len;
@@ -102,7 +164,9 @@ public class IperfProject extends Activity {
 				in.close();
 				out.close();
 				//After the copy operation is finished, we give execute permissions to the "iperf" executable using shell commands.
-				Process processChmod = Runtime.getRuntime().exec("/system/bin/chmod 744 /data/data/iperf.project/iperf"); 
+				Process processChmod = Runtime.getRuntime().exec("/system/bin/chmod 744 /data/data/iperf.project/iperf2014a");
+				// String iperflibpath = getApplicationInfo().nativeLibraryDir + "/iperf2014a";
+				// Process processChmod = Runtime.getRuntime().exec("/system/bin/chmod 744 /data/data/iperf.project/iperf2014a");
 				// Executes the command and waits untill it finishes.
 				processChmod.waitFor();
 			} catch (IOException e) {
@@ -116,14 +180,19 @@ public class IperfProject extends Activity {
 			iperfTask = new IperfTask();
 			iperfTask.execute();				
 			return;					
-		} 
+		}
+		try {
+			Runtime.getRuntime().exec("chmod -R 774 " + "/data/data/iperf.project/iperf2014a");
+		} catch (IOException e) {
+			tv.append("\nProcess Failed");
+		}
 		//Creates an instance of the class IperfTask for running an iperf test, then executes.
 		iperfTask = new IperfTask();
 		iperfTask.execute();
 		return;
 	}
 
-	//This method is used to handle toggle button clicks
+	//This method is used to handle start-abort toggle button clicks
 	public void ToggleButtonClick(View v) {
 		final ToggleButton toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
 		final EditText inputCommands = (EditText) findViewById(R.id.InputCommands);
@@ -138,11 +207,21 @@ public class IperfProject extends Activity {
 				toggleButton.setChecked(false);
 				return;
 			}
-			iperfTask.cancel(true);
+			iperfTask.onCancelled();
+			// iperfTask.cancel(true);
 			iperfTask = null;
 		}
 	}
 
+	// This method is used to handle IPv4-IPv6 toggle button clicks
+	public void ipvToggleButtonClick(View v) {
+		final ToggleButton iptoggleButton = (ToggleButton) findViewById(R.id.ipvButton);
+		if (iptoggleButton.isChecked()) {
+			getLocalIpAddress("IPv6");
+		} else {
+			getLocalIpAddress("IPv4");
+		}
+	}
 	//This method is used to handle the save button click
 	public void SaveButtonClick(View v) {
 		final TextView tv = (TextView) findViewById(R.id.OutputText);
@@ -155,19 +234,25 @@ public class IperfProject extends Activity {
 		alert.setPositiveButton("Save", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String value = input.getText().toString().trim();
+				File sdroot = Environment.getExternalStorageDirectory();
+				// Check for permissions if not get it from user.
+				if (!sdroot.canWrite()) {
+					requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+							Manifest.permission.READ_EXTERNAL_STORAGE}, 2909);
+					tv.append("\n Try now to save log file..");
+				}
 				try {
-					//Save file on SD card
-				    File sdroot = Environment.getExternalStorageDirectory();
-				    if (sdroot.canWrite()){
-				        File txtfile = new File(sdroot, (value + ".txt"));
-				        FileWriter txtwriter = new FileWriter(txtfile);
-				        BufferedWriter out = new BufferedWriter(txtwriter);
-				        out.write(tv.getText().toString());
-				        out.close();
-						tv.append("\nLog file saved to SD card.");		 
-				    }
+					if (sdroot.canWrite()) {
+						//Save file on SD card
+						File txtfile = new File(sdroot, (value + ".txt"));
+						FileWriter txtwriter = new FileWriter(txtfile);
+						BufferedWriter out = new BufferedWriter(txtwriter);
+						out.write(tv.getText().toString());
+						out.close();
+						tv.append("\nLog file saved.");
+					}
 				} catch (IOException e) {
-					tv.append("\nError occurred while saving log file, please check the SD card.");		    
+					tv.append("\nError occurred while saving log file.");
 				}
 			}
 		});
@@ -188,7 +273,10 @@ public class IperfProject extends Activity {
 	public void SkipWelcome(View v) {
 		ViewFlipper switcher = (ViewFlipper) findViewById(R.id.viewSwitcher);
 		switcher.setAnimation(AnimationUtils.loadAnimation(v.getContext(),R.anim.fade));
+		switcher.setFlipInterval(2000);
+		switcher.startFlipping();
 		switcher.showNext();
+		switcher.stopFlipping();
 	}
 	//This is used to switch from the main screen to the help screen with animation.
 	public void GoToHelp(View v) {
@@ -232,10 +320,11 @@ public class IperfProject extends Activity {
 		protected String doInBackground(Void... voids) {
 			//Iperf command syntax check using a Regular expression to protect the system from user exploitation.
 			String str = inputCommands.getText().toString();
-			if (!str.matches("(iperf )?((-[s,-server])|(-[c,-client] ([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5]))|(-[c,-client] \\w{1,63})|(-[h,-help]))(( -[f,-format] [bBkKmMgG])|(\\s)|( -[l,-len] \\d{1,5}[KM])|( -[B,-bind] \\w{1,63})|( -[r,-tradeoff])|( -[v,-version])|( -[N,-nodelay])|( -[T,-ttl] \\d{1,8})|( -[U,-single_udp])|( -[d,-dualtest])|( -[w,-window] \\d{1,5}[KM])|( -[n,-num] \\d{1,10}[KM])|( -[p,-port] \\d{1,5})|( -[L,-listenport] \\d{1,5})|( -[t,-time] \\d{1,8})|( -[i,-interval] \\d{1,4})|( -[u,-udp])|( -[b,-bandwidth] \\d{1,20}[bBkKmMgG])|( -[m,-print_mss])|( -[P,-parallel] d{1,2})|( -[M,-mss] d{1,20}))*"))
-			{
-				publishProgress("Error: invalid syntax. Please try again.\n\n");
-				return null;
+			if (!str.matches("(iperf )?((-[s,-server])|(-[c,-client] ([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5]))|(-[c,-client] \\w{1,63})|(-[h,-help]))(( -[f,-format] [bBkKmMgG])|(\\s)|( -[l,-len] \\d{1,5}[KM])|( -[B,-bind] \\w{1,63})|( -[r,-tradeoff])|( -[v,-version])|( -[V,-V6])|( -[N,-nodelay])|( -[T,-ttl] \\d{1,8})|( -[U,-single_udp])|( -[d,-dualtest])|( -[w,-window] \\d{1,5}[KM])|( -[n,-num] \\d{1,10}[KM])|( -[p,-port] \\d{1,5})|( -[L,-listenport] \\d{1,5})|( -[t,-time] \\d{1,8})|( -[i,-interval] \\d{1,4})|( -[u,-udp])|( -[b,-bandwidth] \\d{1,20}[bBkKmMgG])|( -[m,-print_mss])|( -[P,-parallel] d{1,2})|( -[M,-mss] d{1,20}))*")) {
+				if (!str.matches("(iperf )?((-[s,-server])|(-[c,-client] (.*)::(.*):(.*):(.*):(.*))|(-[c,-client] \\w{1,63})|(-[h,-help]))(( -[f,-format] [bBkKmMgG])|(\\s)|( -[l,-len] \\d{1,5}[KM])|( -[B,-bind] \\w{1,63})|( -[r,-tradeoff])|( -[v,-version])|( -[V,-V6])|( -[N,-nodelay])|( -[T,-ttl] \\d{1,8})|( -[U,-single_udp])|( -[d,-dualtest])|( -[w,-window] \\d{1,5}[KM])|( -[n,-num] \\d{1,10}[KM])|( -[p,-port] \\d{1,5})|( -[L,-listenport] \\d{1,5})|( -[t,-time] \\d{1,8})|( -[i,-interval] \\d{1,4})|( -[u,-udp])|( -[b,-bandwidth] \\d{1,20}[bBkKmMgG])|( -[m,-print_mss])|( -[P,-parallel] d{1,2})|( -[M,-mss] d{1,20}))*")) {
+					publishProgress("Error: invalid syntax. Please try again.\n\n");
+					return null;
+				}
 			}
 			try {
 				//The user input for the parameters is parsed into a string list as required from the ProcessBuilder Class.
@@ -246,7 +335,7 @@ public class IperfProject extends Activity {
 					commandList.remove(0);
 				}
 				//The execution command is added first in the list for the shell interface.
-				commandList.add(0,"/data/data/iperf.project/iperf");
+				commandList.add(0,"/data/data/iperf.project/iperf2014a");
 				//The process is now being run with the verified parameters.
 				process = new ProcessBuilder().command(commandList).redirectErrorStream(true).start();
 				//A buffered output of the stdout is being initialized so the iperf output could be displayed on the screen.
@@ -265,7 +354,7 @@ public class IperfProject extends Activity {
 				process.destroy();
 			}
 			catch (IOException e) {
-				publishProgress("\nError occurred while accessing system resources, please reboot and try again.");
+				// publishProgress("\nError occurred while accessing system resources, please reboot and try again.");
 				e.printStackTrace();
 			}
 			return null;
@@ -294,7 +383,7 @@ public class IperfProject extends Activity {
 				try {
 					process.waitFor();
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					// e.printStackTrace();
 				}
 			}
 			//The toggle button is switched to "off"
@@ -319,7 +408,7 @@ public class IperfProject extends Activity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				tv.append("\nTest is done.\n\n");
+				tv.append("\n");
 			}
 			//The toggle button is switched to "off"
 			toggleButton.setChecked(false);

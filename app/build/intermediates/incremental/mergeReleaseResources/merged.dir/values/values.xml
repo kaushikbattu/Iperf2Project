@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="WelcomeTextColor">#fffafa</color>
-    <string name="copyright">Developed by Battu Kaushik © 2019</string>
-    <string name="help_button_title">"?"</string>
+    <color name="WelcomeTextColor">#00008B</color>
+    <string name="copyright">iPerf version 2.0.14a</string>
+    <string name="help_button_title">"Help"</string>
     <string name="i"> i</string>
     <string name="iperf_text">iPerf2 for Android</string>
 </resources>

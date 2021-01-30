@@ -24,10 +24,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="iperf.project"
     android:targetSandboxVersion="2"
-    android:versionCode="1" >
+    android:versionCode="11" >
 
     <uses-sdk
-        android:maxSdkVersion="28"
+        android:maxSdkVersion="29"
         android:minSdkVersion="4"
         android:targetSdkVersion="28" />
 

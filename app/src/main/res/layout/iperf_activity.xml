@@ -63,10 +63,17 @@
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:text="Save"	android:onClick="SaveButtonClick" android:layout_toRightOf="@+id/toggleButton" >
 		</Button>
+
+		<ToggleButton android:id="@+id/ipvButton"
+			android:layout_height="wrap_content" android:layout_width="wrap_content"
+			android:text="IPButton" android:textOn="IPv6" android:textOff="IPv4"
+			android:onClick="ipvToggleButtonClick" android:layout_toRightOf="@+id/saveButton"
+			android:layout_marginLeft="50dp">
+		</ToggleButton>
+
 		<TextView android:id="@+id/ip" android:layout_height="wrap_content"
 			android:layout_toRightOf="@+id/saveButton" android:layout_width="wrap_content"
-			android:layout_alignTop="@+id/toggleButton"
-			android:layout_alignBottom="@+id/toggleButton"
+			android:layout_below="@+id/ipvButton"
 			android:layout_marginLeft="3dip"></TextView>
 		<LinearLayout
 			android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/ip"
@@ -74,10 +81,11 @@
 			<EditText android:id="@+id/InputCommands" android:layout_weight="1"
 				android:layout_height="wrap_content" android:layout_width="fill_parent"
 				android:background="@android:drawable/editbox_background"
+				android:layout_marginTop="3dip"
 				 android:hint="Please enter an iPerf command"
 				android:maxLength="150" />
-			<Button android:id="@+id/helpButton" android:layout_marginTop="6dip" android:textStyle="bold" android:layout_toRightOf="@+id/InputCommands" android:text="@string/help_button_title" android:layout_alignTop="@+id/InputCommands"
-				android:layout_alignBottom="@+id/InputCommands" android:layout_height="fill_parent" android:layout_width="wrap_content" android:onClick="GoToHelp"/>
+			<Button android:id="@+id/helpButton" android:layout_marginTop="3dip" android:textStyle="bold" android:layout_toRightOf="@+id/InputCommands" android:text="@string/help_button_title" android:layout_alignTop="@+id/InputCommands"
+				android:layout_alignBottom="@+id/InputCommands" android:layout_height="wrap_content" android:layout_width="wrap_content" android:onClick="GoToHelp"/>
 		</LinearLayout>
 		<ScrollView android:id="@+id/Scroller"
 			android:layout_height="fill_parent" android:layout_width="fill_parent"

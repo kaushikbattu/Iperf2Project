@@ -19,7 +19,7 @@
     <string name="iperf_text">iPerf2 for Android</string>
     <color name="WelcomeTextColor">#00008B</color>
     <string name="i"> i</string>
-    <string name="copyright">iPerf version 2.0.13</string>
-    <string name="help_button_title">&quot;?&quot;</string>
+    <string name="copyright">iPerf version 2.0.14a</string>
+    <string name="help_button_title">&quot;Help"</string>
 
 </resources>

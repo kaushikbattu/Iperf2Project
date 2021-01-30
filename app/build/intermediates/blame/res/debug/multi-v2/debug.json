@@ -6,18 +6,18 @@
                 {
                     "source": "C:\\Users\\Battu\\AndroidStudioProjects\\Iperf2Project\\app\\src\\main\\res\\values\\strings.xml",
                     "from": {
-                        "startLines": "19,21,-1,-1,-1",
-                        "startColumns": "4,4,-1,-1,-1",
-                        "startOffsets": "750,834,-1,-1,-1",
-                        "endColumns": "50,58,-1,-1,-1",
-                        "endOffsets": "796,888,-1,-1,-1"
+                        "startLines": "-1,21,-1,-1,-1",
+                        "startColumns": "-1,4,-1,-1,-1",
+                        "startOffsets": "-1,834,-1,-1,-1",
+                        "endColumns": "-1,59,-1,-1,-1",
+                        "endOffsets": "-1,889,-1,-1,-1"
                     },
                     "to": {
                         "startLines": "2,3,4,5,6",
                         "startColumns": "4,4,4,4,4",
-                        "startOffsets": "55,106,165,215,248",
-                        "endColumns": "50,58,49,32,57",
-                        "endOffsets": "101,160,210,243,301"
+                        "startOffsets": "55,106,166,219,252",
+                        "endColumns": "50,59,52,32,57",
+                        "endOffsets": "101,161,214,247,305"
                     }
                 }
             ]
